@@ -1,29 +1,29 @@
 {
   "expo": {
-    "name": "tp7Efsi",
-    "slug": "tp7Efsi",
+    "name": "Pagina Increible",
+    "slug": "Pagina Increible",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/start-icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "image": "./assets/start-icon.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#ff0000"
     },
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/start-icon.png",
+        "backgroundColor": "#ff0000"
       },
       "edgeToEdgeEnabled": true
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/start-icon.png"
     }
   }
 }
