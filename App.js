@@ -2,25 +2,29 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ImageBackground, Image, SafeAreaView, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { useState } from 'react';
 const localImg = require('./assets/edgarAllanPou.jpeg')
+const successImg = require('./assets/successPic.gif')
 import { Audio } from 'expo-av';
 
 const correctEmail = "Rick@email.com"
 const correctPassword = "1234"
 
+
 export default function App() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [showPopup, setShowPopup] = useState(false)
 
   const handleSubmit = async () => {
     if (email === correctEmail && password === correctPassword) {
-      Alert.alert(`Never gonna give you up
-Never gonna let you down`)
+      if (!showPopup) {
+        const { sound } = await Audio.Sound.createAsync(
+          require('./assets/success.mp3')
+        );
+        setShowPopup(true)
+        await sound.playAsync();
+      }
 
-      const { sound } = await Audio.Sound.createAsync(
-        require('./assets/success.mp3')
-      );
 
-      await sound.playAsync();
     } else {
       Alert.alert('Usuario o contraseña incorrectos, vuelva a intentar')
     }
@@ -30,10 +34,11 @@ Never gonna let you down`)
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Edgar Allan Pou's login app</Text>
-
       </View>
 
       <View style={styles.container}>
+
+
 
         <Image
           source={localImg}
@@ -55,15 +60,62 @@ Never gonna let you down`)
           </TouchableOpacity>
         </View>
 
+        {showPopup &&
+          <View style={styles.popup}>
+            <TouchableOpacity title='presioname!' onPress={() => setShowPopup(false)} style={styles.closeBtn}>
+              <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 30, }}>x</Text>
+            </TouchableOpacity>
+
+            <Image style={styles.successImg}
+              source={successImg}
+            />
+            <Text>Never gonna give you up</Text>
+            <Text>Never gonna let you down</Text>
+            <Text>Never gonna run around and desert you</Text>
+            <Text>Never gonna make you cry</Text>
+            <Text>Never gonna say goodbye</Text>
+            <Text>Never gonna tell a lie and hurt you</Text>
+
+          </View>
+        }
 
       </View>
 
-      <StatusBar style='dark' />
+      <StatusBar style='light' />
     </SafeAreaView >
   );
 }
 
 const styles = StyleSheet.create({
+  successImg: {
+    width: 200,
+    height: 150,
+    marginBottom: '3%'
+  },
+
+  closeBtn: {
+    position: 'absolute',
+    top: '0%',
+    left: '3%',
+  },
+
+  popup: {
+    position: 'absolute',
+    zIndex: 99,
+    width: '90%',
+    height: 'auto',
+    padding: '5%',
+    marginTop: '20%',
+    backgroundColor: 'white',
+    borderWidth: 3,
+    borderColor: 'crimson',
+    borderRadius: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxShadow: '0px 0px 10px 0px rgb(0, 0, 0)',
+
+  },
+
   header: {
     backgroundColor: 'red',
     padding: '10%',
